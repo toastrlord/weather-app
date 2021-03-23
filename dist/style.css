@@ -3,9 +3,20 @@ body {
     margin-left: 0;
 }
 
+#display {
+    display: flex;
+}
+
 .weather-data-display {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background-color: grey;
+    transition: all 500ms;
+}
+
+.weather-data-display:hover {
+    background-color: white;
 }
 
 .weekday {

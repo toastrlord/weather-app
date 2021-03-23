@@ -31,14 +31,14 @@ async function findCities(name) {
 }
 
 function processWeatherData(data) {
-        return {
-            weatherDescription: data.weather[0].main,
-            clouds: data.clouds,
-            humidity: data.humidity,
-            rain: data.rain,
-            maxTemp: data.temp.max,
-            minTemp: data.temp.min,
-        };
+    return {
+        weatherDescription: data.weather[0].main,
+        clouds: data.clouds,
+        humidity: data.humidity,
+        rain: data.rain,
+        maxTemp: Math.round(parseFloat(data.temp.max)),
+        minTemp: Math.round(parseFloat(data.temp.min)),
+    };
 }
 
 async function fetchWeatherData(city) {

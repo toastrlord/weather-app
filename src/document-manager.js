@@ -20,12 +20,14 @@ function createDailyWeatherElement(dayData) {
     container.appendChild(weatherIcon);
     const temperatureContainer = document.createElement('div'); // contains the high and low temperatures
     temperatureContainer.classList.add('temperature-container');
+
+    // TODO: add units!!
     const highTemp = document.createElement('div');
-    highTemp.textContent = dayData.maxTemp;
+    highTemp.textContent = `Max ${dayData.maxTemp}`;
     highTemp.classList.add('temperature');
     temperatureContainer.appendChild(highTemp);
     const lowTemp = document.createElement('div');
-    lowTemp.textContent = dayData.minTemp;
+    lowTemp.textContent = `Min ${dayData.minTemp}`;
     lowTemp.classList.add('temperature');
     temperatureContainer.appendChild(lowTemp);
     container.appendChild(temperatureContainer);
