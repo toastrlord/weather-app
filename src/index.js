@@ -1,31 +1,50 @@
 import {fetchWeatherData, findCities} from './weather-api';
-import {createDailyWeatherElement} from './document-manager';
+import {createDailyWeatherElement, createCityElement} from './document-manager';
 
 const submitButton = document.querySelector('#submit-button');
 const cityInputBox = document.querySelector('#city-name');
+const display = document.querySelector('#display');
 
-async function weeklyWeatherTest() {
-    const cities = await findCities('Rochester');
-    const weather = await fetchWeatherData(cities[0]);
-    weather.forEach(dayData => {
-        const element = createDailyWeatherElement(dayData);
-        document.querySelector('body').appendChild(element);
-    });
+function clearDisplay() {
+    while (display.firstChild) {
+        display.firstChild.remove();
+    }
 }
 
-weeklyWeatherTest();
+async function search(cityName) {
+    clearDisplay();
+    const cities = await findCities(cityName);
+    if (cities.length === 0) {
+        console.log('No cities found!');
+    }
+    else if (cities.length === 1) {
+        const weather = await fetchWeatherData(cities[0]);
+        weather.forEach(dayData => {
+            const element = createDailyWeatherElement(dayData);
+            display.appendChild(element);
+        });
+    }
+    else {
+        cities.forEach(city => { 
+            const element = createCityElement(city);
+            display.appendChild(element);
+            element.addEventListener('click', () => {
+                clearDisplay();
+                fetchWeatherData(city)
+                .then(response => {
+                    response.forEach(weather => {
+                        const element = createDailyWeatherElement(weather);
+                        display.appendChild(element);
+                    });
+                })
+            });
+        });
+
+    }
+}
 
 submitButton.addEventListener('click', () => {
     if (cityInputBox.checkValidity()) {
-        console.log('checking for cities');
-        const cities = findCities(cityInputBox.value).then(response => {
-            console.log(response);
-            if (response.length === 1) {
-                return response[0];
-            }
-            else {
-                return response;
-            }
-        });
+        search(cityInputBox.value);
     }
 });

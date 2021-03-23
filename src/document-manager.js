@@ -1,7 +1,8 @@
 'use strict'
 
-// want to have:
-// day of the week high temp, low temp, weather icon, chance of rain
+function getWeatherIcon(weatherDescription) {
+    return '';
+}
 
 /**
  * Generate an HTML element given one days worth of weather data
@@ -15,7 +16,7 @@ function createDailyWeatherElement(dayData) {
     dayOfWeek.textContent = 'Day'; // FIXME!
     container.appendChild(dayOfWeek);
     const weatherIcon = document.createElement('img');
-    //weatherIcon.src = getWeatherIcon(dayData.weatherDescription);
+    weatherIcon.src = getWeatherIcon(dayData.weatherDescription);
     container.appendChild(weatherIcon);
     const temperatureContainer = document.createElement('div'); // contains the high and low temperatures
     temperatureContainer.classList.add('temperature-container');
@@ -32,4 +33,24 @@ function createDailyWeatherElement(dayData) {
     return container;
 }
 
-export {createDailyWeatherElement};
+function createCityElement(cityData) {
+    const container = document.createElement('div');
+    container.classList.add('city-data-display');
+    const cityName = document.createElement('div');
+    cityName.textContent = cityData.name;
+    container.appendChild(cityName);
+    if (cityData.hasOwnProperty('state')) {
+        const stateElement = document.createElement('div');
+        stateElement.textContent = cityData.state;
+        container.appendChild(stateElement);
+    }
+    if (cityData.hasOwnProperty('country')) {
+        const countryElement = document.createElement('div');
+        countryElement.textContent = cityData.country;
+        container.appendChild(countryElement);
+    }
+
+    return container;
+}
+
+export {createDailyWeatherElement, createCityElement};
