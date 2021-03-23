@@ -1,0 +1,22 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toastrlord/weather-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toastrlord/weather-app/issues"
+  },
+  "homepage": "https://github.com/toastrlord/weather-app#readme",
+  "dependencies": {
+    "webpack": "^5.27.2"
+  }
+}
