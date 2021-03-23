@@ -12,18 +12,22 @@ async function loadCityData() {
         const cityData = await response.json();
         return cityData;
     }
-    catch {error} {
+    catch (error) {
         console.log(error);
     }
 }
 
 async function findCities(name) {
     const lowercaseName = name.toLowerCase().trim();
-    
-    const cities = (await cityData).filter((city) => {
-        return city.name.toLowerCase() === lowercaseName;
-    });
-    return cities;
+    try {
+        const cities = (await cityData).filter((city) => {
+            return city.name.toLowerCase() === lowercaseName;
+        });
+        return cities;
+    }
+    catch(error) {
+        console.log(error);
+    }
 }
 
 function processWeatherData(data) {
@@ -42,7 +46,6 @@ async function fetchWeatherData(city) {
         const apiMiddle = `lat=${city.coord.lat}&lon=${city.coord.lon}&exclude=minutely,hourly&units=imperial`;
         const response = await fetch(`${apiCallStart}${apiMiddle}${apiCallEnd}`, {mode: 'cors'});
         const weatherData = await response.json();
-        console.log(weatherData);
         return weatherData.daily.map(city => processWeatherData(city));
     }
     catch(error) {

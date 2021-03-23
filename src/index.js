@@ -11,35 +11,46 @@ function clearDisplay() {
     }
 }
 
-async function search(cityName) {
+async function displayWeatherResults(cityData) {
     clearDisplay();
-    const cities = await findCities(cityName);
-    if (cities.length === 0) {
-        console.log('No cities found!');
-    }
-    else if (cities.length === 1) {
-        const weather = await fetchWeatherData(cities[0]);
+    try {
+        // TODO: show loading icon!
+        const weather = await fetchWeatherData(cityData);
+        // TODO: hide loading icon now that we're done!
         weather.forEach(dayData => {
             const element = createDailyWeatherElement(dayData);
             display.appendChild(element);
         });
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
+function displayError(errorText) {
+    const element = document.createElement('div');
+    element.classList.add('error-message');
+    element.textContent = errorText;
+    display.appendChild(element);
+}
+
+async function search(cityName) {
+    clearDisplay();
+    const cities = await findCities(cityName);
+    if (cities.length === 0) {
+        displayError('No cities found!');
+    }
+    else if (cities.length === 1) {
+        displayWeatherResults(cities[0]);
     }
     else {
         cities.forEach(city => { 
             const element = createCityElement(city);
             display.appendChild(element);
             element.addEventListener('click', () => {
-                clearDisplay();
-                fetchWeatherData(city)
-                .then(response => {
-                    response.forEach(weather => {
-                        const element = createDailyWeatherElement(weather);
-                        display.appendChild(element);
-                    });
-                })
+                displayWeatherResults(city);
             });
         });
-
     }
 }
 
