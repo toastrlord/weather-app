@@ -1,0 +1,22 @@
+body {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.weather-data-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.weekday {
+    font-weight: bold;
+}
+
+.temperature-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.temperature {
+    
+}

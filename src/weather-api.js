@@ -27,15 +27,14 @@ async function findCities(name) {
 }
 
 function processWeatherData(data) {
-    const daily = data.daily;
-    return daily.map((dayData) => {
         return {
-            clouds: dayData.clouds,
-            humidity: dayData.humidity,
-            rain: dayData.rain, 
-            temp: dayData.temp,
+            weatherDescription: data.weather[0].main,
+            clouds: data.clouds,
+            humidity: data.humidity,
+            rain: data.rain,
+            maxTemp: data.temp.max,
+            minTemp: data.temp.min,
         };
-    });
 }
 
 async function fetchWeatherData(city) {
@@ -43,7 +42,8 @@ async function fetchWeatherData(city) {
         const apiMiddle = `lat=${city.coord.lat}&lon=${city.coord.lon}&exclude=minutely,hourly&units=imperial`;
         const response = await fetch(`${apiCallStart}${apiMiddle}${apiCallEnd}`, {mode: 'cors'});
         const weatherData = await response.json();
-        console.log(processWeatherData(city));
+        console.log(weatherData);
+        return weatherData.daily.map(city => processWeatherData(city));
     }
     catch(error) {
         console.log(error);
