@@ -15,6 +15,14 @@ function clearDisplay() {
 async function displayWeatherResults(cityData) {
     clearDisplay();
     try {
+        const cityHeader = document.createElement('div');
+        if (cityData.state !== undefined) {
+            cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.state}, ${cityData.country}`;
+        }
+        else {
+            cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.country}`;
+        }
+        display.appendChild(cityHeader);
         // TODO: show loading icon!
         const weather = await fetchWeatherData(cityData);
         const container = document.createElement('div');

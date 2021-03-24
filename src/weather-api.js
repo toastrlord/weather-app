@@ -4,10 +4,22 @@ const apiCallStart = 'https://api.openweathermap.org/data/2.5/onecall?';
 const apiCallEnd = getAPIKey();
 const cityData = loadCityData();
 const countryCodes = loadCountryCodes();
+const stateCodes = loadStateCodes();
 
 async function loadCountryCodes() {
     try {
         const response = await fetch('country_codes.json');
+        const result = await response.json();
+        return result;
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
+async function loadStateCodes() {
+    try {
+        const response = await fetch('us_states.json');
         const result = await response.json();
         return result;
     }
@@ -47,9 +59,15 @@ async function findCities(name) {
             return city.name.toLowerCase() === lowercaseName;
         });
         const loadedCountryCodes = await countryCodes;
+        const loadedStateCodes = await stateCodes;
         const citiesWithCountry = (await cities).map(city => {
             const country = loadedCountryCodes[city.country];
-            return {name: city.name, state: city.state, country, coord: city.coord};
+            if (city.hasOwnProperty('state')) {
+                const state = loadedStateCodes[city.state];
+                return {name: city.name, state, country, coord: city.coord};
+            }
+        
+            return {name: city.name, country, coord: city.coord};
         });
 
         return citiesWithCountry;
