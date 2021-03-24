@@ -3,6 +3,14 @@
 const apiCallStart = 'https://api.openweathermap.org/data/2.5/onecall?';
 const apiCallEnd = getAPIKey();
 const cityData = loadCityData();
+const countryCodes = loadCountryCodes();
+
+async function loadCountryCodes() {
+    const response = await fetch('country_codes.json');
+    const result = await response.json();
+
+    return result;
+}
 
 async function getAPIKey() {
     const response = await fetch('api_key.txt');
@@ -29,6 +37,7 @@ async function findCities(name) {
         const cities = (await cityData).filter((city) => {
             return city.name.toLowerCase() === lowercaseName;
         });
+        
         return cities;
     }
     catch(error) {

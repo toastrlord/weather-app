@@ -4,7 +4,8 @@ const imgURLStart = 'http://openweathermap.org/img/wn/';
 const imgURLEnd = '@2x.png';
 
 // weather icon mapping is per openweathermap.org/weather-conditions
-// currently only has daytime icons
+// the 'd' at the end stands for day,
+// there are also nightly icons with 'n'
 const weatherIcons = {
     clear: '01d',
     clouds: '02d',
@@ -52,6 +53,10 @@ function getWeekday(index) {
     }
 }
 
+function getTemperatureText(label, temperature, units) {
+    return `${label} ${temperature}°${units}`;
+}
+
 /**
  * Generate an HTML element given one days worth of weather data
  * @param {*} dayData 
@@ -74,11 +79,11 @@ function createDailyWeatherElement(dayData, index) {
 
     // TODO: add units!!
     const highTemp = document.createElement('div');
-    highTemp.textContent = `Hi: ${dayData.maxTemp}°`;
+    highTemp.textContent = getTemperatureText('Hi:', dayData.maxTemp, 'F');
     highTemp.classList.add('temperature');
     temperatureContainer.appendChild(highTemp);
     const lowTemp = document.createElement('div');
-    lowTemp.textContent = `Lo: ${dayData.minTemp}°`;
+    lowTemp.textContent = getTemperatureText('Lo:', dayData.minTemp, 'F');
     lowTemp.classList.add('temperature');
     temperatureContainer.appendChild(lowTemp);
     container.appendChild(temperatureContainer);
