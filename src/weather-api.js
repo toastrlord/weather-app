@@ -6,22 +6,31 @@ const cityData = loadCityData();
 const countryCodes = loadCountryCodes();
 
 async function loadCountryCodes() {
-    const response = await fetch('country_codes.json');
-    const result = await response.json();
-
-    return result;
+    try {
+        const response = await fetch('country_codes.json');
+        const result = await response.json();
+        return result;
+    }
+    catch(error) {
+        console.log(error);
+    }
 }
 
 async function getAPIKey() {
-    const response = await fetch('api_key.txt');
-    const apiKey = await response.text();
-    const result = `&appid=${apiKey}`;
-    return result;
+    try {
+        const response = await fetch('api_key.txt');
+        const apiKey = await response.text();
+        const result = `&appid=${apiKey}`;
+
+        return result;
+    }
+    catch(error) {
+        console.log(error);
+    }
 }
 
 async function loadCityData() {
     try {
-        console.log('loading');
         const response = await fetch('city.list.json', {mode: 'cors'});
         const cityData = await response.json();
         return cityData;
@@ -37,8 +46,13 @@ async function findCities(name) {
         const cities = (await cityData).filter((city) => {
             return city.name.toLowerCase() === lowercaseName;
         });
-        
-        return cities;
+        const loadedCountryCodes = await countryCodes;
+        const citiesWithCountry = (await cities).map(city => {
+            const country = loadedCountryCodes[city.country];
+            return {name: city.name, state: city.state, country, coord: city.coord};
+        });
+
+        return citiesWithCountry;
     }
     catch(error) {
         console.log(error);
