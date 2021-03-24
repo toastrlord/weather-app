@@ -10,10 +10,13 @@ body {
 
 #display {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-top: 32px;
 }
 
-.weather-data-container {
+.flex-container {
     display: flex;
 }
 
@@ -29,7 +32,13 @@ body {
     padding: 10px;
 }
 
-.weather-data-display:hover, .city-data-display:hover {
+.city-data-display {
+    border: solid 2px rgba(255, 255, 255, 0);
+    cursor: pointer;
+}
+
+.city-data-display:hover {
+    border: solid 2px black;
     background-color: white;
 }
 
@@ -40,4 +49,8 @@ body {
 .temperature-container {
     display: flex;
     flex-direction: column;
+}
+
+.city-message {
+    margin-bottom: 16px;
 }

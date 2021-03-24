@@ -26,16 +26,42 @@ function getWeatherIcon(weatherDescription) {
     }
 }
 
+function getWeekday(index) {
+    const today = (new Date()).getDay();
+    if (index === 0) {
+        return 'Today';
+    }
+    else {
+        const day = (today + index) % 7;
+        switch(day) {
+            case 0:
+                return 'Sunday';
+            case 1:
+                return 'Monday';
+            case 2:
+                return 'Tuesday';
+            case 3:
+                return 'Wednesday';
+            case 4:
+                return 'Thursday';
+            case 5:
+                return 'Friday';
+            case 6:
+                return 'Saturday';
+        }
+    }
+}
+
 /**
  * Generate an HTML element given one days worth of weather data
  * @param {*} dayData 
  */
-function createDailyWeatherElement(dayData) {
+function createDailyWeatherElement(dayData, index) {
     const container = document.createElement('div');
     container.classList.add('weather-data-display');
     const dayOfWeek = document.createElement('div');
     dayOfWeek.classList.add('weekday');
-    dayOfWeek.textContent = 'Day'; // FIXME!
+    dayOfWeek.textContent = getWeekday(index); // FIXME!
     container.appendChild(dayOfWeek);
     const weatherIcon = document.createElement('img');
     weatherIcon.src = getWeatherIcon(dayData.weatherDescription.toLowerCase());

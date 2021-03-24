@@ -4,6 +4,7 @@ import {createDailyWeatherElement, createCityElement} from './document-manager';
 const submitButton = document.querySelector('#submit-button');
 const cityInputBox = document.querySelector('#city-name');
 const display = document.querySelector('#display');
+const form = document.querySelector('form');
 
 function clearDisplay() {
     while (display.firstChild) {
@@ -17,10 +18,10 @@ async function displayWeatherResults(cityData) {
         // TODO: show loading icon!
         const weather = await fetchWeatherData(cityData);
         const container = document.createElement('div');
-        container.classList.add('weather-data-container');
+        container.classList.add('flex-container');
         // TODO: hide loading icon now that we're done!
-        weather.forEach(dayData => {
-            const element = createDailyWeatherElement(dayData);
+        weather.forEach((dayData, index) => {
+            const element = createDailyWeatherElement(dayData, index);
             container.appendChild(element);
         });
         display.appendChild(container);
@@ -47,9 +48,16 @@ async function search(cityName) {
         displayWeatherResults(cities[0]);
     }
     else {
+        const cityText = document.createElement('div');
+        cityText.classList.add('city-message');
+        cityText.textContent = `${cities.length} cities found! Select one:`;
+        display.appendChild(cityText);
+        const cityDisplay = document.createElement('div');
+        cityDisplay.classList.add('flex-container');
+        display.appendChild(cityDisplay);
         cities.forEach(city => { 
             const element = createCityElement(city);
-            display.appendChild(element);
+            cityDisplay.appendChild(element);
             element.addEventListener('click', () => {
                 displayWeatherResults(city);
             });
@@ -62,3 +70,9 @@ submitButton.addEventListener('click', () => {
         search(cityInputBox.value);
     }
 });
+
+form.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        submitButton.click();
+    }
+})
