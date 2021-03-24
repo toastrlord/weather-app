@@ -13,6 +13,10 @@ body {
     align-items: center;
     background-color: grey;
     transition: all 500ms;
+    border-radius: 12px;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding: 10px;
 }
 
 .weather-data-display:hover {
@@ -25,9 +29,5 @@ body {
 
 .temperature-container {
     display: flex;
-    flex-direction: row;
-}
-
-.temperature {
-    
+    flex-direction: column;
 }

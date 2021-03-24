@@ -1,7 +1,29 @@
 'use strict'
 
+const imgURLStart = 'http://openweathermap.org/img/wn/';
+const imgURLEnd = '@2x.png';
+
+// weather icon mapping is per openweathermap.org/weather-conditions
+// currently only has daytime icons
+const weatherIcons = {
+    clear: '01d',
+    clouds: '02d',
+    'scattered clouds': '03d',
+    'broken clouds': '04d',
+    'shower rain': '09d',
+    rain: '10d',
+    thunderstorm: '11d',
+    snow: '13d',
+    mist: '50d',
+}
+
 function getWeatherIcon(weatherDescription) {
-    return '';
+    if (weatherIcons.hasOwnProperty(weatherDescription)) {
+        return `${imgURLStart}${weatherIcons[weatherDescription]}${imgURLEnd}`;
+    }
+    else {
+        console.log(`No icon found for ${weatherDescription}`);
+    }
 }
 
 /**
@@ -16,18 +38,21 @@ function createDailyWeatherElement(dayData) {
     dayOfWeek.textContent = 'Day'; // FIXME!
     container.appendChild(dayOfWeek);
     const weatherIcon = document.createElement('img');
-    weatherIcon.src = getWeatherIcon(dayData.weatherDescription);
+    weatherIcon.src = getWeatherIcon(dayData.weatherDescription.toLowerCase());
     container.appendChild(weatherIcon);
+    const weatherTextElement = document.createElement('div');
+    weatherTextElement.textContent = dayData.weatherDescription;
+    container.appendChild(weatherTextElement);
     const temperatureContainer = document.createElement('div'); // contains the high and low temperatures
     temperatureContainer.classList.add('temperature-container');
 
     // TODO: add units!!
     const highTemp = document.createElement('div');
-    highTemp.textContent = `Max ${dayData.maxTemp}`;
+    highTemp.textContent = `Hi: ${dayData.maxTemp}°`;
     highTemp.classList.add('temperature');
     temperatureContainer.appendChild(highTemp);
     const lowTemp = document.createElement('div');
-    lowTemp.textContent = `Min ${dayData.minTemp}`;
+    lowTemp.textContent = `Lo: ${dayData.minTemp}°`;
     lowTemp.classList.add('temperature');
     temperatureContainer.appendChild(lowTemp);
     container.appendChild(temperatureContainer);
