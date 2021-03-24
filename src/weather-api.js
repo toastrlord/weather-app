@@ -1,6 +1,5 @@
 'use strict'
 
-const apiKey = '056fbaeb5e0ac21a223f3af28f256fc7';
 const apiCallStart = 'https://api.openweathermap.org/data/2.5/onecall?';
 const apiCallEnd = `&appid=${apiKey}`;
 const cityData = loadCityData();

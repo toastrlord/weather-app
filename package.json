@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/toastrlord/weather-app#readme",
   "dependencies": {
+    "reset-css": "^5.0.1",
     "webpack": "^5.27.2"
   },
   "devDependencies": {

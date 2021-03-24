@@ -1,13 +1,23 @@
+@import 'reset.css';
+
 body {
     margin-top: 0;
     margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #display {
     display: flex;
+    justify-content: center;
 }
 
-.weather-data-display {
+.weather-data-container {
+    display: flex;
+}
+
+.weather-data-display, .city-data-display {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +29,7 @@ body {
     padding: 10px;
 }
 
-.weather-data-display:hover {
+.weather-data-display:hover, .city-data-display:hover {
     background-color: white;
 }
 

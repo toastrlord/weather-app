@@ -16,11 +16,14 @@ async function displayWeatherResults(cityData) {
     try {
         // TODO: show loading icon!
         const weather = await fetchWeatherData(cityData);
+        const container = document.createElement('div');
+        container.classList.add('weather-data-container');
         // TODO: hide loading icon now that we're done!
         weather.forEach(dayData => {
             const element = createDailyWeatherElement(dayData);
-            display.appendChild(element);
+            container.appendChild(element);
         });
+        display.appendChild(container);
     }
     catch(error) {
         console.log(error);
