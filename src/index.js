@@ -23,7 +23,6 @@ async function displayWeatherResults(cityData) {
             cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.country}`;
         }
         cityHeader.classList.add('city-header');
-        display.appendChild(cityHeader);
         // TODO: show loading icon!
         const weather = await fetchWeatherData(cityData);
         const container = document.createElement('div');
@@ -33,6 +32,7 @@ async function displayWeatherResults(cityData) {
             const element = createDailyWeatherElement(dayData, index);
             container.appendChild(element);
         });
+        display.appendChild(cityHeader);
         display.appendChild(container);
     }
     catch(error) {

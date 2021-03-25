@@ -73,19 +73,20 @@ function getTemperatureText(label, temperature, units) {
 function createDailyWeatherElement(dayData, index) {
     const container = document.createElement('div');
     container.classList.add('weather-data-display');
-    const dayOfWeek = document.createElement('div');
-    dayOfWeek.classList.add('weekday');
-    dayOfWeek.textContent = getWeekday(index);
-    container.appendChild(dayOfWeek);
     const date = document.createElement('div');
     date.classList.add('weekday');
     date.textContent = getDate(index);
     container.appendChild(date);
+    const dayOfWeek = document.createElement('div');
+    dayOfWeek.classList.add('weekday');
+    dayOfWeek.textContent = getWeekday(index);
+    container.appendChild(dayOfWeek);
     const weatherIcon = document.createElement('img');
     weatherIcon.src = getWeatherIcon(dayData.weatherDescription.toLowerCase());
     container.appendChild(weatherIcon);
     const weatherTextElement = document.createElement('div');
     weatherTextElement.textContent = dayData.weatherDescription;
+    weatherTextElement.classList.add('weather-condition');
     container.appendChild(weatherTextElement);
     const temperatureContainer = document.createElement('div'); // contains the high and low temperatures
     temperatureContainer.classList.add('temperature-container');
