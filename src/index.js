@@ -22,6 +22,7 @@ async function displayWeatherResults(cityData) {
         else {
             cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.country}`;
         }
+        cityHeader.classList.add('city-header');
         display.appendChild(cityHeader);
         // TODO: show loading icon!
         const weather = await fetchWeatherData(cityData);
