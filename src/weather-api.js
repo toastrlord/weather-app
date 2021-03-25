@@ -6,50 +6,33 @@ const cityData = loadCityData();
 const countryCodes = loadCountryCodes();
 const stateCodes = loadStateCodes();
 
-async function loadCountryCodes() {
+async function fetchData(dataLocation, retrievalFunction) {
     try {
-        const response = await fetch('country_codes.json');
-        const result = await response.json();
+        const response = await fetch(dataLocation);
+        const result = await response[retrievalFunction]();
+
         return result;
     }
     catch(error) {
         console.log(error);
     }
+}
+
+async function loadCountryCodes() {
+    return fetchData('country_codes.json', 'json');
 }
 
 async function loadStateCodes() {
-    try {
-        const response = await fetch('us_states.json');
-        const result = await response.json();
-        return result;
-    }
-    catch(error) {
-        console.log(error);
-    }
+    return fetchData('us_states.json', 'json');
 }
 
 async function getAPIKey() {
-    try {
-        const response = await fetch('api_key.txt');
-        const apiKey = await response.text();
-        const result = `&appid=${apiKey}`;
-
-        return result;
-    }
-    catch(error) {
-        console.log(error);
-    }
+    const apiKey = await fetchData('api_key.txt', 'text');
+    return `&appid=${apiKey}`;
 }
 
 async function loadCityData() {
-    try {
-        const response = await fetch('city.list.json', {mode: 'cors'});
-        const cityData = await response.json();
-        return cityData;
-    }
-    catch (error) {
-        console.log(error);
-    }
+    return fetchData('city_list.json', 'json');
 }
 
 async function findCities(name) {
