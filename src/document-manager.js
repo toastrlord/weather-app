@@ -1,7 +1,11 @@
 'use strict'
 
+import {add as addDate, format as formatDate} from 'date-fns';
+
 const imgURLStart = 'http://openweathermap.org/img/wn/';
 const imgURLEnd = '@2x.png';
+const todayDate = new Date();
+const today = (new Date()).getDay();
 
 // weather icon mapping is per openweathermap.org/weather-conditions
 // the 'd' at the end stands for day,
@@ -28,7 +32,6 @@ function getWeatherIcon(weatherDescription) {
 }
 
 function getWeekday(index) {
-    const today = (new Date()).getDay();
     if (index === 0) {
         return 'Today';
     }
@@ -53,6 +56,12 @@ function getWeekday(index) {
     }
 }
 
+function getDate(index) {
+    return formatDate(
+        addDate(todayDate, { days: index }),
+        'MMMM do');
+}
+
 function getTemperatureText(label, temperature, units) {
     return `${label} ${temperature}°${units}`;
 }
@@ -66,8 +75,12 @@ function createDailyWeatherElement(dayData, index) {
     container.classList.add('weather-data-display');
     const dayOfWeek = document.createElement('div');
     dayOfWeek.classList.add('weekday');
-    dayOfWeek.textContent = getWeekday(index); // FIXME!
+    dayOfWeek.textContent = getWeekday(index);
     container.appendChild(dayOfWeek);
+    const date = document.createElement('div');
+    date.classList.add('weekday');
+    date.textContent = getDate(index);
+    container.appendChild(date);
     const weatherIcon = document.createElement('img');
     weatherIcon.src = getWeatherIcon(dayData.weatherDescription.toLowerCase());
     container.appendChild(weatherIcon);
