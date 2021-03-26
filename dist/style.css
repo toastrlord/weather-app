@@ -9,14 +9,26 @@ body {
     background-color: #4545bf;
 }
 
+header {
+    background-color: #5a7de8;
+    height: 48px;
+    margin-bottom: 32px;
+    width: 100%;
+    position: absolute;
+    font-size: 36px;
+    text-justify: center;
+    text-align: left;
+    font-weight: bold;
+}
+
 input {
-    border-radius: 12px;
+    border-radius: 24px;
     border: solid 0px transparent;
     padding: 4px;
     margin-left: 4px;
     margin-right: 4px;
     font-size: 16px;
-    padding-left: 10px;
+    padding-left: 14px;
 }
 
 button {
@@ -26,6 +38,13 @@ button {
     font-weight: bold;
     border-radius: 16px;
     font-size: 16px;
+    cursor: pointer;
+    transition: 150ms all;
+}
+
+button:active {
+    background-color: white;
+    color: black;
 }
 
 label {
@@ -49,7 +68,7 @@ label {
     padding-bottom: 8px;
 }
 
-.city-header, .city-message {
+.city-header, .city-message, .error-message {
     margin-bottom: 24px;
     font-size: 20px;
     font-weight: bold;

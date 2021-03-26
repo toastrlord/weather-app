@@ -7,9 +7,9 @@ const imgURLEnd = '@2x.png';
 const todayDate = new Date();
 const today = (new Date()).getDay();
 
-// weather icon mapping is per openweathermap.org/weather-conditions
-// the 'd' at the end stands for day,
-// there are also nightly icons with 'n'
+/* weather icon mapping is per openweathermap.org/weather-conditions
+   the 'd' at the end stands for day,
+   there are also nightly icons with 'n' */
 const weatherIcons = {
     clear: '01d',
     clouds: '02d',
@@ -22,6 +22,11 @@ const weatherIcons = {
     mist: '50d',
 }
 
+/**
+ * Return the proper URL for this weather status
+ * @param {String} weatherDescription 
+ * @returns {String}
+ */
 function getWeatherIcon(weatherDescription) {
     if (weatherIcons.hasOwnProperty(weatherDescription)) {
         return `${imgURLStart}${weatherIcons[weatherDescription]}${imgURLEnd}`;
@@ -31,6 +36,11 @@ function getWeatherIcon(weatherDescription) {
     }
 }
 
+/**
+ * Return 'Today' if index is 0, otherwise add the value to todays date and return the proper weekday string
+ * @param {Number} index The number of days past today
+ * @returns {String}
+ */
 function getWeekday(index) {
     if (index === 0) {
         return 'Today';
@@ -56,6 +66,11 @@ function getWeekday(index) {
     }
 }
 
+/**
+ * Return a string formatted as 'Month Xth'
+ * @param {Number} index The number of days past today
+ * @returns {String} 
+ */
 function getDate(index) {
     return formatDate(
         addDate(todayDate, { days: index }),
