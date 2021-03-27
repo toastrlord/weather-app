@@ -78,6 +78,22 @@ function getDate(index) {
         'MMMM do');
 }
 
+function createDateElement(index) {
+    const date = document.createElement('div');
+    date.classList.add('weekday');
+    date.textContent = getDate(index);
+    
+    return date;
+}
+
+function createDayOfWeekElement(index) {
+    const dayOfWeek = document.createElement('div');
+    dayOfWeek.classList.add('weekday');
+    dayOfWeek.textContent = getWeekday(index);
+
+    return dayOfWeek;
+}
+
 function createTemperatureElement(label, temp, units) {
     const element = document.createElement('div');
     element.textContent = getTemperatureText(label, temp, units);
@@ -87,6 +103,21 @@ function createTemperatureElement(label, temp, units) {
     return element;
 }
 
+function createWeatherIconElement(dayData) {
+    const weatherIcon = document.createElement('img');
+    weatherIcon.src = getWeatherIcon(dayData.weatherDescription.toLowerCase());
+    
+    return weatherIcon;
+}
+
+function createWeatherTextElement(dayData) {
+    const weatherTextElement = document.createElement('div');
+    weatherTextElement.textContent = dayData.weatherDescription;
+    weatherTextElement.classList.add('weather-condition');
+
+    return weatherTextElement;
+}
+
 /**
  * Generate an HTML element given one days worth of weather data
  * @param {*} dayData 
@@ -94,28 +125,15 @@ function createTemperatureElement(label, temp, units) {
 function createDailyWeatherElement(dayData, index) {
     const container = document.createElement('div');
     container.classList.add('weather-data-display');
-    const date = document.createElement('div');
-    date.classList.add('weekday');
-    date.textContent = getDate(index);
-    container.appendChild(date);
-    const dayOfWeek = document.createElement('div');
-    dayOfWeek.classList.add('weekday');
-    dayOfWeek.textContent = getWeekday(index);
-    container.appendChild(dayOfWeek);
-    const weatherIcon = document.createElement('img');
-    weatherIcon.src = getWeatherIcon(dayData.weatherDescription.toLowerCase());
-    container.appendChild(weatherIcon);
-    const weatherTextElement = document.createElement('div');
-    weatherTextElement.textContent = dayData.weatherDescription;
-    weatherTextElement.classList.add('weather-condition');
-    container.appendChild(weatherTextElement);
+    container.appendChild(createDateElement(index));
+    container.appendChild(createDayOfWeekElement(index));
+    container.appendChild(createWeatherIconElement(dayData));
+    container.appendChild(createWeatherTextElement(dayData));
     const temperatureContainer = document.createElement('div'); // contains the high and low temperatures
     temperatureContainer.classList.add('temperature-container');
 
-    const highTemp = createTemperatureElement('Hi:', dayData.maxTemp, dayData.units);
-    temperatureContainer.appendChild(highTemp);
-    const lowTemp = createTemperatureElement('Lo:', dayData.minTemp, dayData.units);
-    temperatureContainer.appendChild(lowTemp);
+    temperatureContainer.appendChild(createTemperatureElement('Hi:', dayData.maxTemp, dayData.units));
+    temperatureContainer.appendChild(createTemperatureElement('Lo:', dayData.minTemp, dayData.units));
     container.appendChild(temperatureContainer);
 
     return container;

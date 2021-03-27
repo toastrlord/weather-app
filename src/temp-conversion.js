@@ -13,6 +13,18 @@ function swapToMetric() {
 }
 
 /**
+ * Swap the current units system
+ */
+function toggleUnits() {
+    if (currentUnits === IMPERIAL) {
+        currentUnits = METRIC;
+    }
+    else {
+        currentUnits = IMPERIAL;
+    }
+}
+
+/**
  * 
  * @param {Number} temperature Temperature in degrees F
  * @returns {Number} Equivalent temperature in celsius
@@ -59,6 +71,11 @@ function getTemperatureText(label, temperature, units) {
     return `${label} ${Math.round(convertedTemp)}°${currentUnits}`;
 }
 
+/**
+ * Update the temperatures to be in the current units system. Store the unrounded temp in a data attribute so we don't lose precision on subsequent
+ * changes of units
+ * @param {HTMLElement} weatherElement A single weather forecast element
+ */
 function updateTemp(weatherElement) {
     const temperatures = weatherElement.querySelectorAll('.temperature');
     temperatures.forEach(temp => {
