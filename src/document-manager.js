@@ -121,6 +121,7 @@ function createWeatherTextElement(dayData) {
 /**
  * Generate an HTML element given one days worth of weather data
  * @param {*} dayData 
+ * @param {Number} index
  */
 function createDailyWeatherElement(dayData, index) {
     const container = document.createElement('div');
@@ -139,21 +140,23 @@ function createDailyWeatherElement(dayData, index) {
     return container;
 }
 
+function createCityEntry(text) {
+    const element = document.createElement('div');
+    element.textContent = text;
+    element.classList.add('city-entry');
+    
+    return element;
+}
+
 function createCityElement(cityData) {
     const container = document.createElement('div');
     container.classList.add('city-data-display');
-    const cityName = document.createElement('div');
-    cityName.textContent = cityData.name;
-    container.appendChild(cityName);
+    container.appendChild(createCityEntry(cityData.name));
     if (cityData.hasOwnProperty('state')) {
-        const stateElement = document.createElement('div');
-        stateElement.textContent = cityData.state;
-        container.appendChild(stateElement);
+        container.appendChild(createCityEntry(cityData.state));
     }
     if (cityData.hasOwnProperty('country')) {
-        const countryElement = document.createElement('div');
-        countryElement.textContent = cityData.country;
-        container.appendChild(countryElement);
+        container.appendChild(createCityEntry(cityData.country));
     }
 
     return container;
