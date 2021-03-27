@@ -9,6 +9,10 @@ body {
     background-color: #4545bf;
 }
 
+p {
+    font-weight: bold;
+}
+
 header {
     background-color: #5a7de8;
     height: 48px;
@@ -66,6 +70,8 @@ label {
     padding: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
+    display: flex;
+    align-items: center;
 }
 
 .city-header, .city-message, .error-message {
@@ -112,6 +118,36 @@ label {
 .weekday {
     font-weight: bold;
     margin-bottom: 6px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    background-color:#4545bf;
+    border-radius: 16px;
+    width: 60px;
+    height: 23px;
+    color: white;
+}
+
+.switch input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider {
+    position: relative;
+    color: white;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
 }
 
 .temperature-container {

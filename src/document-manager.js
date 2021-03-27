@@ -1,6 +1,7 @@
 'use strict'
 
 import {add as addDate, format as formatDate} from 'date-fns';
+import {getTemperatureText, convertTemperature} from './temp-conversion';
 
 const imgURLStart = 'http://openweathermap.org/img/wn/';
 const imgURLEnd = '@2x.png';
@@ -77,8 +78,13 @@ function getDate(index) {
         'MMMM do');
 }
 
-function getTemperatureText(label, temperature, units) {
-    return `${label} ${temperature}°${units}`;
+function createTemperatureElement(label, temp, units) {
+    const element = document.createElement('div');
+    element.textContent = getTemperatureText(label, temp, units);
+    element.classList.add('temperature');
+    element.dataset.unroundedTemp = convertTemperature(temp, units);
+    
+    return element;
 }
 
 /**
@@ -106,14 +112,9 @@ function createDailyWeatherElement(dayData, index) {
     const temperatureContainer = document.createElement('div'); // contains the high and low temperatures
     temperatureContainer.classList.add('temperature-container');
 
-    // TODO: add units!!
-    const highTemp = document.createElement('div');
-    highTemp.textContent = getTemperatureText('Hi:', dayData.maxTemp, 'F');
-    highTemp.classList.add('temperature');
+    const highTemp = createTemperatureElement('Hi:', dayData.maxTemp, dayData.units);
     temperatureContainer.appendChild(highTemp);
-    const lowTemp = document.createElement('div');
-    lowTemp.textContent = getTemperatureText('Lo:', dayData.minTemp, 'F');
-    lowTemp.classList.add('temperature');
+    const lowTemp = createTemperatureElement('Lo:', dayData.minTemp, dayData.units);
     temperatureContainer.appendChild(lowTemp);
     container.appendChild(temperatureContainer);
 

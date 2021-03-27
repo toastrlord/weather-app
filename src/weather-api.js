@@ -66,8 +66,9 @@ function processWeatherData(data) {
         clouds: data.clouds,
         humidity: data.humidity,
         rain: data.rain,
-        maxTemp: Math.round(parseFloat(data.temp.max)),
-        minTemp: Math.round(parseFloat(data.temp.min)),
+        maxTemp: data.temp.max,
+        minTemp: data.temp.min,
+        units: 'F',
     };
 }
 

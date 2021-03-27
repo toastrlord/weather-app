@@ -1,8 +1,11 @@
 import {fetchWeatherData, findCities} from './weather-api';
 import {createDailyWeatherElement, createCityElement} from './document-manager';
+import {swapToImperial, swapToMetric, updateTemp} from './temp-conversion';
 
 const submitButton = document.querySelector('#submit-button');
 const cityInputBox = document.querySelector('#city-name');
+const fahrenheitButton = document.querySelector('#fahrenheit');
+const celsiusButton = document.querySelector('#celsius');
 const display = document.querySelector('#display');
 const form = document.querySelector('form');
 
@@ -77,6 +80,26 @@ async function search(cityName) {
 submitButton.addEventListener('click', () => {
     if (cityInputBox.checkValidity()) {
         search(cityInputBox.value);
+    }
+});
+
+fahrenheitButton.addEventListener('click', () => {
+    swapToImperial();
+    const forecastData = display.querySelectorAll('.weather-data-display');
+    if (forecastData) {
+        forecastData.forEach(forecast => {
+            updateTemp(forecast);
+        });
+    }
+});
+
+celsiusButton.addEventListener('click', () => {
+    swapToMetric();
+    const forecastData = display.querySelectorAll('.weather-data-display');
+    if (forecastData) {
+        forecastData.forEach(forecast => {
+            updateTemp(forecast);
+        });
     }
 });
 
