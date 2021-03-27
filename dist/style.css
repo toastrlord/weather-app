@@ -76,8 +76,8 @@ label {
 
 #fahrenheit, #celsius {
     font-weight: bold;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 #submit-button {
@@ -208,4 +208,26 @@ label {
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  .loading-icon {
+    border-radius: 50%;
+    /*position: absolute;*/
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    animation: scaleUp 1s infinite cubic-bezier(.37,.18,.61,.82);
+    margin: 2px;
+  }
+
+  @keyframes scaleUp {
+      0% {
+        transform: scale(.5, .5);
+      }
+      50% {
+        transform: scale(1, 1);
+      }
+      100% {
+          transform: scale(.5, .5);
+      }
   }

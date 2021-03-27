@@ -162,4 +162,22 @@ function createCityElement(cityData) {
     return container;
 }
 
-export {createDailyWeatherElement, createCityElement};
+function createLoadingCircle(delay) {
+    const circle = document.createElement('div');
+    circle.classList.add('loading-icon');
+    circle.style.animationDelay = `${delay}s`;
+
+    return circle;
+}
+
+function createLoadingElement() {
+    const container = document.createElement('div');
+    container.classList.add('flex-container');
+    container.appendChild(createLoadingCircle(-.5));
+    container.appendChild(createLoadingCircle(-.25))
+    container.appendChild(createLoadingCircle(0))
+
+    return container;
+}
+
+export {createDailyWeatherElement, createCityElement, createLoadingElement};

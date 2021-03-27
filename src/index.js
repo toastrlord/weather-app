@@ -1,5 +1,5 @@
 import {fetchWeatherData, findCities} from './weather-api';
-import {createDailyWeatherElement, createCityElement} from './document-manager';
+import {createDailyWeatherElement, createCityElement, createLoadingElement} from './document-manager';
 import {toggleUnits, updateTemp} from './temp-conversion';
 
 const submitButton = document.querySelector('#submit-button');
@@ -98,4 +98,6 @@ form.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         submitButton.click();
     }
-})
+});
+
+display.appendChild(createLoadingElement());
