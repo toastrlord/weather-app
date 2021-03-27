@@ -1,16 +1,6 @@
-import { te } from "date-fns/locale";
-
 const IMPERIAL = 'F';
 const METRIC = 'C';
 let currentUnits = IMPERIAL;
-
-function swapToImperial() {
-    currentUnits = IMPERIAL;
-}
-
-function swapToMetric() {
-    currentUnits = METRIC;
-}
 
 /**
  * Swap the current units system
@@ -87,4 +77,4 @@ function updateTemp(weatherElement) {
     });
 }
 
-export {getTemperatureText, swapToImperial, swapToMetric, updateTemp, convertTemperature}
+export {getTemperatureText, toggleUnits, updateTemp, convertTemperature}

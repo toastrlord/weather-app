@@ -1,12 +1,13 @@
 import {fetchWeatherData, findCities} from './weather-api';
 import {createDailyWeatherElement, createCityElement} from './document-manager';
-import {swapToImperial, swapToMetric, updateTemp} from './temp-conversion';
+import {toggleUnits, updateTemp} from './temp-conversion';
 
 const submitButton = document.querySelector('#submit-button');
 const cityInputBox = document.querySelector('#city-name');
 const fahrenheitButton = document.querySelector('#fahrenheit');
 const celsiusButton = document.querySelector('#celsius');
 const display = document.querySelector('#display');
+const tempSwapSwitch = document.querySelector('#temp-swap');
 const form = document.querySelector('form');
 
 function clearDisplay() {
@@ -83,18 +84,8 @@ submitButton.addEventListener('click', () => {
     }
 });
 
-fahrenheitButton.addEventListener('click', () => {
-    swapToImperial();
-    const forecastData = display.querySelectorAll('.weather-data-display');
-    if (forecastData) {
-        forecastData.forEach(forecast => {
-            updateTemp(forecast);
-        });
-    }
-});
-
-celsiusButton.addEventListener('click', () => {
-    swapToMetric();
+tempSwapSwitch.addEventListener('change', () => {
+    toggleUnits();
     const forecastData = display.querySelectorAll('.weather-data-display');
     if (forecastData) {
         forecastData.forEach(forecast => {

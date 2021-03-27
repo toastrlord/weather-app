@@ -74,6 +74,17 @@ label {
     align-items: center;
 }
 
+#fahrenheit, #celsius {
+    font-weight: bold;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#submit-button {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
 .city-header, .city-message, .error-message {
     margin-bottom: 24px;
     font-size: 20px;
@@ -129,28 +140,6 @@ label {
     margin-bottom: 6px;
 }
 
-.switch {
-    position: relative;
-    display: inline-block;
-    background-color:#4545bf;
-    border-radius: 16px;
-    width: 40px;
-    height: 23px;
-    color: white;
-}
-
-.switch input {
-    width: 0;
-    height: 0;
-    opacity: 0;
-}
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-
 .temperature-container {
     display: flex;
     flex-direction: column;
@@ -160,6 +149,21 @@ input:checked + .slider:before {
     margin-top: 6px;
 }
 
+.switch input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    background-color:#4545bf;
+    border-radius: 16px;
+    width: 40px;
+    height: 23px;
+    color: white;
+}
 
 /* The slider */
 .slider {
@@ -172,6 +176,8 @@ input:checked + .slider:before {
     background-color:#4545bf;
     -webkit-transition: .4s;
     transition: .4s;
+    padding-left: 6px;
+    padding-right: 6px;
   }
   
   .slider:before {
@@ -185,14 +191,17 @@ input:checked + .slider:before {
     -webkit-transition: .4s;
     transition: .4s;
   }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
   
   input:checked + .slider:before {
     -webkit-transform: translateX(17px);
     -ms-transform: translateX(17px);
     transform: translateX(17px);
   }
-  
-  /* Rounded sliders */
+
   .slider.round {
     border-radius: 34px;
   }
