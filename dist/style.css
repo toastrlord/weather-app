@@ -134,7 +134,7 @@ label {
     display: inline-block;
     background-color:#4545bf;
     border-radius: 16px;
-    width: 60px;
+    width: 40px;
     height: 23px;
     color: white;
 }
@@ -151,14 +151,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-.slider {
-    position: relative;
-    color: white;
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
-}
-
 .temperature-container {
     display: flex;
     flex-direction: column;
@@ -167,3 +159,44 @@ input:checked + .slider:before {
 .temperature, .weather-condition {
     margin-top: 6px;
 }
+
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:#4545bf;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(17px);
+    -ms-transform: translateX(17px);
+    transform: translateX(17px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
