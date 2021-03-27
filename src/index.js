@@ -18,6 +18,8 @@ function clearDisplay() {
 
 async function displayWeatherResults(cityData) {
     clearDisplay();
+    // show that we're loading...
+    display.appendChild(createLoadingElement());
     try {
         const cityHeader = document.createElement('div');
         if (cityData.state !== undefined) {
@@ -27,15 +29,27 @@ async function displayWeatherResults(cityData) {
             cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.country}`;
         }
         cityHeader.classList.add('city-header');
-        // TODO: show loading icon!
         const weather = await fetchWeatherData(cityData);
         const container = document.createElement('div');
         container.classList.add('flex-container');
         // TODO: hide loading icon now that we're done!
+        let promises = [];
         weather.forEach((dayData, index) => {
             const element = createDailyWeatherElement(dayData, index);
             container.appendChild(element);
+            const img = element.querySelector('img');
+            promises.push(new Promise((resolve, reject) => {
+                try {
+                    img.onload = resolve();
+                }
+                catch(error) {
+                    console.log(error);
+                    reject();
+                }
+            }));
         });
+        await Promise.all(promises);
+        clearDisplay();
         display.appendChild(cityHeader);
         display.appendChild(container);
     }
@@ -53,7 +67,9 @@ function displayError(errorText) {
 
 async function search(cityName) {
     clearDisplay();
+    display.appendChild(createLoadingElement());
     const cities = await findCities(cityName);
+    clearDisplay();
     if (cities.length === 0) {
         displayError('No cities found!');
     }
@@ -99,5 +115,3 @@ form.addEventListener('keydown', (e) => {
         submitButton.click();
     }
 });
-
-display.appendChild(createLoadingElement());
