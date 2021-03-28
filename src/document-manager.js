@@ -162,6 +162,17 @@ function createCityElement(cityData) {
     return container;
 }
 
+function createCityHeaderElement(numCities) {
+    const container = document.createElement('div');
+    container.classList.add('city-message');
+    container.textContent = `${numCities} cities found! Select one:`;
+    display.appendChild(container);
+    const cityDisplay = document.createElement('div');
+    cityDisplay.classList.add('flex-container');
+
+    return container;
+}
+
 function createLoadingCircle(delay) {
     const circle = document.createElement('div');
     circle.classList.add('loading-icon');
@@ -180,4 +191,4 @@ function createLoadingElement() {
     return container;
 }
 
-export {createDailyWeatherElement, createCityElement, createLoadingElement};
+export {createDailyWeatherElement, createCityElement, createLoadingElement, createCityHeaderElement};

@@ -32,15 +32,13 @@ async function displayWeatherResults(cityData) {
         const weather = await fetchWeatherData(cityData);
         const container = document.createElement('div');
         container.classList.add('flex-container');
-        // TODO: hide loading icon now that we're done!
         let promises = [];
         weather.forEach((dayData, index) => {
             const element = createDailyWeatherElement(dayData, index);
             container.appendChild(element);
-            const img = element.querySelector('img');
             promises.push(new Promise((resolve, reject) => {
                 try {
-                    img.onload = resolve();
+                    element.onload = resolve();
                 }
                 catch(error) {
                     console.log(error);
@@ -48,6 +46,7 @@ async function displayWeatherResults(cityData) {
                 }
             }));
         });
+        // wait until the images have loaded and we're all set
         await Promise.all(promises);
         clearDisplay();
         display.appendChild(cityHeader);
@@ -65,6 +64,17 @@ function displayError(errorText) {
     display.appendChild(element);
 }
 
+function displayCities(cities) {
+    display.appendChild(createCityHeaderElement(cities.length));
+    cities.forEach(city => { 
+        const element = createCityElement(city);
+        cityDisplay.appendChild(element);
+        element.addEventListener('click', () => {
+            displayWeatherResults(city);
+        });
+    });
+}
+
 async function search(cityName) {
     clearDisplay();
     display.appendChild(createLoadingElement());
@@ -77,20 +87,7 @@ async function search(cityName) {
         displayWeatherResults(cities[0]);
     }
     else {
-        const cityText = document.createElement('div');
-        cityText.classList.add('city-message');
-        cityText.textContent = `${cities.length} cities found! Select one:`;
-        display.appendChild(cityText);
-        const cityDisplay = document.createElement('div');
-        cityDisplay.classList.add('flex-container');
-        display.appendChild(cityDisplay);
-        cities.forEach(city => { 
-            const element = createCityElement(city);
-            cityDisplay.appendChild(element);
-            element.addEventListener('click', () => {
-                displayWeatherResults(city);
-            });
-        });
+        displayCities(cities);
     }
 }
 
