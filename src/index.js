@@ -1,5 +1,5 @@
 import {fetchWeatherData, findCities} from './weather-api';
-import {createDailyWeatherElement, createCityElement, createLoadingElement} from './document-manager';
+import {createDailyWeatherElement, createCityElement, createLoadingElement, createCityHeaderElement} from './document-manager';
 import {toggleUnits, updateTemp} from './temp-conversion';
 
 const submitButton = document.querySelector('#submit-button');
@@ -65,7 +65,11 @@ function displayError(errorText) {
 }
 
 function displayCities(cities) {
-    display.appendChild(createCityHeaderElement(cities.length));
+    const header = createCityHeaderElement(cities.length);
+    display.appendChild(header);
+    const cityDisplay = document.createElement('div');
+    cityDisplay.classList.add('flex-container');
+    display.appendChild(cityDisplay);
     cities.forEach(city => { 
         const element = createCityElement(city);
         cityDisplay.appendChild(element);

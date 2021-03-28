@@ -167,8 +167,6 @@ function createCityHeaderElement(numCities) {
     container.classList.add('city-message');
     container.textContent = `${numCities} cities found! Select one:`;
     display.appendChild(container);
-    const cityDisplay = document.createElement('div');
-    cityDisplay.classList.add('flex-container');
 
     return container;
 }
