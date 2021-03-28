@@ -148,7 +148,7 @@ function createCityEntry(text) {
     return element;
 }
 
-function createCityElement(cityData) {
+function createCityElement(cityData, onClick) {
     const container = document.createElement('div');
     container.classList.add('city-data-display');
     container.appendChild(createCityEntry(cityData.name));
@@ -159,16 +159,31 @@ function createCityElement(cityData) {
         container.appendChild(createCityEntry(cityData.country));
     }
 
+    container.addEventListener('click', onClick);
+
     return container;
 }
 
-function createCityHeaderElement(numCities) {
+function createSelectCityHeaderElement(numCities) {
     const container = document.createElement('div');
     container.classList.add('city-message');
     container.textContent = `${numCities} cities found! Select one:`;
     display.appendChild(container);
 
     return container;
+}
+
+function createCityWeatherHeaderElement(cityData) {
+    const cityHeader = document.createElement('div');
+    if (cityData.state !== undefined) {
+        cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.state}, ${cityData.country}`;
+    }
+    else {
+        cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.country}`;
+    }
+    cityHeader.classList.add('city-header');
+    
+    return cityHeader;
 }
 
 function createLoadingCircle(delay) {
@@ -189,4 +204,12 @@ function createLoadingElement() {
     return container;
 }
 
-export {createDailyWeatherElement, createCityElement, createLoadingElement, createCityHeaderElement};
+function createErrorMessageElement(errorText) {
+    const element = document.createElement('div');
+    element.classList.add('error-message');
+    element.textContent = errorText;
+
+    return element;
+}
+
+export {createDailyWeatherElement, createCityElement, createLoadingElement, createSelectCityHeaderElement, createErrorMessageElement, createCityWeatherHeaderElement};

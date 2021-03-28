@@ -1,11 +1,9 @@
 import {fetchWeatherData, findCities} from './weather-api';
-import {createDailyWeatherElement, createCityElement, createLoadingElement, createCityHeaderElement} from './document-manager';
+import {createDailyWeatherElement, createCityElement, createLoadingElement, createSelectCityHeaderElement, createErrorMessageElement, createCityWeatherHeaderElement} from './document-manager';
 import {toggleUnits, updateTemp} from './temp-conversion';
 
 const submitButton = document.querySelector('#submit-button');
 const cityInputBox = document.querySelector('#city-name');
-const fahrenheitButton = document.querySelector('#fahrenheit');
-const celsiusButton = document.querySelector('#celsius');
 const display = document.querySelector('#display');
 const tempSwapSwitch = document.querySelector('#temp-swap');
 const form = document.querySelector('form');
@@ -21,17 +19,10 @@ async function displayWeatherResults(cityData) {
     // show that we're loading...
     display.appendChild(createLoadingElement());
     try {
-        const cityHeader = document.createElement('div');
-        if (cityData.state !== undefined) {
-            cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.state}, ${cityData.country}`;
-        }
-        else {
-            cityHeader.textContent = `Weekly forecast for ${cityData.name}, ${cityData.country}`;
-        }
-        cityHeader.classList.add('city-header');
-        const weather = await fetchWeatherData(cityData);
+        const cityHeader = createCityWeatherHeaderElement(cityData);
         const container = document.createElement('div');
         container.classList.add('flex-container');
+        const weather = await fetchWeatherData(cityData);
         let promises = [];
         weather.forEach((dayData, index) => {
             const element = createDailyWeatherElement(dayData, index);
@@ -58,24 +49,18 @@ async function displayWeatherResults(cityData) {
 }
 
 function displayError(errorText) {
-    const element = document.createElement('div');
-    element.classList.add('error-message');
-    element.textContent = errorText;
-    display.appendChild(element);
+    display.appendChild(createErrorMessageElement(errorText));
 }
 
 function displayCities(cities) {
-    const header = createCityHeaderElement(cities.length);
+    const header = createSelectCityHeaderElement(cities.length);
     display.appendChild(header);
     const cityDisplay = document.createElement('div');
     cityDisplay.classList.add('flex-container');
     display.appendChild(cityDisplay);
     cities.forEach(city => { 
-        const element = createCityElement(city);
+        const element = createCityElement(city, () => displayWeatherResults(city));
         cityDisplay.appendChild(element);
-        element.addEventListener('click', () => {
-            displayWeatherResults(city);
-        });
     });
 }
 
