@@ -8,7 +8,7 @@ const stateCodes = loadStateCodes();
 
 async function fetchData(dataLocation, retrievalFunction) {
     try {
-        const response = await fetch(dataLocation);
+        const response = await fetch(dataLocation, {mode: 'cors'});
         const result = await response[retrievalFunction]();
 
         return result;

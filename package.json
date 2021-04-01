@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "build-dev": "webpack --mode development",
     "build": "webpack --mode production",
     "start": "live-server dist"
   },
