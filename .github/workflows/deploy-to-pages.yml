@@ -13,6 +13,7 @@ jobs:
       - name: Install and Build
         run: |
           npm install
+          npm install -D webpack-cli
           npm run build
 
       - name: Deploy
