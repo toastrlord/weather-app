@@ -196,7 +196,7 @@ function createLoadingCircle(delay) {
 
 function createLoadingElement() {
     const container = document.createElement('div');
-    container.classList.add('flex-container');
+    container.classList.add('loading-container');
     container.appendChild(createLoadingCircle(-.5));
     container.appendChild(createLoadingCircle(-.25))
     container.appendChild(createLoadingCircle(0))

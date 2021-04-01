@@ -101,7 +101,7 @@ label {
     margin-bottom: 2px;
 }
 
-.flex-container {
+.weather-container, .city-container, .flex-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -114,8 +114,7 @@ label {
     background-color: #5a7de8;
     transition: all 500ms;
     border-radius: 12px;
-    margin-left: 6px;
-    margin-right: 6px;
+    margin: 6px;
     padding: 10px;
     transition: all 250ms;
 }
@@ -231,3 +230,29 @@ label {
           transform: scale(.5, .5);
       }
   }
+
+  @media only screen and (hover: none) and (pointer: coarse) {
+    body, input, .city-header, .city-message {
+        font-size: 32px;
+    }
+
+    header {
+        font-size: 64px;
+        height: 64px;
+    }
+
+    button {
+        font-size: 32px;
+        border-radius: 45%;
+    }
+
+    .weather-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .weather-data-display {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
