@@ -61,6 +61,7 @@ label {
     justify-content: center;
     align-items: center;
     margin-top: 32px;
+    width: 90%;
 }
 
 .searchbar-form {
@@ -94,6 +95,7 @@ label {
     border-radius: 16px;
     padding-left: 12px;
     padding-right: 12px;
+    text-align: center;
 }
 
 .city-entry {
@@ -101,10 +103,14 @@ label {
     margin-bottom: 2px;
 }
 
-.weather-container, .city-container, .flex-container {
+.weather-container, .city-container, .loading-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+}
+
+.weather-container, .city-container {
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .weather-data-display, .city-data-display {
@@ -254,5 +260,6 @@ label {
     .weather-data-display {
         flex-direction: row;
         justify-content: space-evenly;
+        width: 90%;
     }
 }

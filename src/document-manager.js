@@ -126,8 +126,10 @@ function createWeatherTextElement(dayData) {
 function createDailyWeatherElement(dayData, index) {
     const container = document.createElement('div');
     container.classList.add('weather-data-display');
-    container.appendChild(createDateElement(index));
-    container.appendChild(createDayOfWeekElement(index));
+    const headerContainer = document.createElement('div');
+    headerContainer.appendChild(createDateElement(index));
+    headerContainer.appendChild(createDayOfWeekElement(index));
+    container.append(headerContainer);
     container.appendChild(createWeatherIconElement(dayData));
     container.appendChild(createWeatherTextElement(dayData));
     const temperatureContainer = document.createElement('div'); // contains the high and low temperatures
