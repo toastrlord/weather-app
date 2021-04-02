@@ -4,9 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build-dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "live-server dist"
+    "start": "webpack serve --open --mode development --hot"
   },
   "repository": {
     "type": "git",
@@ -20,10 +19,20 @@
   "homepage": "https://github.com/toastrlord/weather-app#readme",
   "dependencies": {
     "date-fns": "^2.19.0",
-    "reset-css": "^5.0.1",
-    "webpack": "^5.27.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "reset-css": "^5.0.1"
   },
   "devDependencies": {
-    "webpack-cli": "^4.5.0"
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.27.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
