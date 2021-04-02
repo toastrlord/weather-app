@@ -27,7 +27,7 @@ async function loadStateCodes() {
 }
 
 async function getAPIKey() {
-    const apiKey = await fetchData('api_key.txt', 'text');
+    const apiKey = await fetchData('api_key.md', 'text');
     return `&appid=${apiKey}`;
 }
 
