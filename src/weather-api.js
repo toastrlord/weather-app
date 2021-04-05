@@ -1,7 +1,7 @@
 'use strict'
 
 const apiCallStart = 'https://api.openweathermap.org/data/2.5/onecall?';
-const apiCallEnd = getAPIKey();
+const apiKey = fetchData('api_key.md', 'text');
 const cityData = fetchData('city_list.json', 'json');
 const countryCodes = fetchData('country_codes.json', 'json');
 const stateCodes = fetchData('us_states.json', 'json');
@@ -16,11 +16,6 @@ async function fetchData(dataLocation, retrievalFunction) {
     catch(error) {
         console.log(error);
     }
-}
-
-async function getAPIKey() {
-    const apiKey = await fetchData('api_key.md', 'text');
-    return `&appid=${apiKey}`;
 }
 
 async function findCities(name) {
@@ -63,7 +58,8 @@ function processWeatherData(data) {
 async function fetchWeatherData(city) {
     try {
         const apiMiddle = `lat=${city.coord.lat}&lon=${city.coord.lon}&exclude=minutely,hourly&units=imperial`;
-        const url = `${apiCallStart}${apiMiddle}${await apiCallEnd}`;
+        const apiCallEnd = `&appid=${await apiKey}`;
+        const url = `${apiCallStart}${apiMiddle}${apiCallEnd}`;
         const response = await fetch(url, {mode: 'cors'});
         const weatherData = await response.json();
         return weatherData.daily.map(city => processWeatherData(city));

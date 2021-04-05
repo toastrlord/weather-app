@@ -1,3 +1,6 @@
+import LoadingIcon from './LoadingIcon';
+import {fetchWeatherData} from './..weather-api';
+
 class WeeklyForecast extends Component {
     constructor(props) {
         super(props);
@@ -9,15 +12,21 @@ class WeeklyForecast extends Component {
     }
 
     async componentDidMount() {
-
+        const data = await fetchWeatherData(this.props.city);
+        this.setState({
+            weatherData: data,
+            loaded: true,
+        });
     }
 
     render() {
         if (loaded) {
-            return null;
+            return {this.state.weatherData.map(dailyData => {
+                return null;
+            })};
         }
         else {
-            return null;
+            return <LoadingIcon />;
         }
     }
 }

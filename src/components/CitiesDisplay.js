@@ -1,28 +1,43 @@
 import React from 'react';
 import CityEntry from './CityEntry';
+import {findCities} from './../weather-api';
+import LoadingIcon from './LoadingIcon';
 
 class CitiesDisplay extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            cities = [],
+            loaded = false,
+        }
     }
 
     async componentDidMount() {
-        
+        const cities = await findCities(this.props.searchName);
+        this.setState({
+            cities: cities,
+            loaded = true,
+        });
     }
 
     render() {
-        return (
-            <div className='city-container'>
-                {props.cities.map(city => {
-                    <CityEntry 
-                        name={city.name} 
-                        state={city.state} 
-                        country={city.country}
-                        onClick={() => props.onClick(city)}
-                    />
-                })}
-            </div>
-           ); 
+        const {cities, loaded} = this.state;
+        if (loaded) {
+            return (
+                <div className='city-container'>
+                    {cities.map(city => {
+                        return (<CityEntry 
+                            cityData={city}
+                            onClick={() => props.onClick(city)}
+                        />);
+                    })}
+                </div>
+               ); 
+        }
+        else {
+            return (<LoadingIcon />);
+        }
     }
 }
 

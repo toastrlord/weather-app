@@ -215,9 +215,8 @@ label {
     border-radius: 50%;
   }
 
-  .loading-icon {
+  .loading-circle {
     border-radius: 50%;
-    /*position: absolute;*/
     width: 30px;
     height: 30px;
     background-color: white;

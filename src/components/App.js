@@ -3,7 +3,7 @@ import CitiesDisplay from './CitiesDisplay';
 
 const NONE = 0;
 const FORECAST = 1;
-const CITY = 2;
+const CITIES = 2;
 
 class App extends Component {
     constructor(props) {
@@ -20,24 +20,26 @@ class App extends Component {
 
     searchForCity(name) {
         this.setState({
-            display: CITY,
-            currentCity: name,
+            display: CITIES,
+            name: name,
         });
     }
 
     clickOnCity(city) {
         this.setState({
             display: FORECAST,
+            currentCity: city,
         });
     }
 
     render() {
         const { display, name } = this.state;
-        if (display === CITY) {
-            <CitiesDisplay searchName={name} onClick={clickOnCity} />
+        if (display === CITIES) {
+            return <CitiesDisplay searchName={name} onClick={clickOnCity} />
         }
-        if (display === WEATHER) {
-
+        if (display === FORECAST) {
+            return <WeeklyForecast city={this.state.currentCity} />
         }
+        return null;
     }
 }

@@ -9,7 +9,8 @@ function Field(props) {
 }
 
 function CityEntry(props) {
-    const {name, state, country, onClick} = props;
+    const onClick = props.onClick;
+    const {name, state, country} = props.cityData;
     let stateField;
     let countryField;
     if (state) {
