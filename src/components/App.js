@@ -17,6 +17,7 @@ class App extends Component {
 
         this.searchForCity = this.searchForCity.bind(this);
         this.clickOnCity = this.clickOnCity.bind(this);
+        this.toggleUnits = this.toggleUnits.bind(this);
     }
 
     searchForCity(name) {
@@ -46,8 +47,15 @@ class App extends Component {
             displayElement =  <CitiesDisplay searchName={name} onClick={clickOnCity} />;
         }
         if (display === FORECAST) {
-            displayElemnt =  <WeeklyForecast city={this.state.currentCity} displayUnits={displayUnits} />;
+            displayElement =  <WeeklyForecast city={this.state.currentCity} displayUnits={displayUnits} />;
         }
-        return null;
+
+        return <div>
+            <header>What's The Weather?</header>
+            <Searchbar onClick={this.toggleUnits}/>
+            <div id='display'>
+                {displayElement}
+            </div>
+        </div>;
     }
 }
