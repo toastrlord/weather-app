@@ -12,6 +12,7 @@ class App extends Component {
         this.state = {
             display: NONE,
             currentCity: '',
+            displayUnits: 'F',
         }
 
         this.searchForCity = this.searchForCity.bind(this);
@@ -32,13 +33,20 @@ class App extends Component {
         });
     }
 
+    toggleUnits() {
+        this.setState({
+            displayUnits: this.state.displayUnits === 'F' ? 'C' : 'F'
+        });
+    }
+
     render() {
-        const { display, name } = this.state;
+        const { display, name, displayUnits } = this.state;
+        let displayElement = null;
         if (display === CITIES) {
-            return <CitiesDisplay searchName={name} onClick={clickOnCity} />
+            displayElement =  <CitiesDisplay searchName={name} onClick={clickOnCity} />;
         }
         if (display === FORECAST) {
-            return <WeeklyForecast city={this.state.currentCity} />
+            displayElemnt =  <WeeklyForecast city={this.state.currentCity} displayUnits={displayUnits} />;
         }
         return null;
     }

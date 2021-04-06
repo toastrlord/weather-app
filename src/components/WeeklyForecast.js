@@ -8,6 +8,7 @@ class WeeklyForecast extends Component {
         this.state = {
             weatherData: null,
             loaded: false,
+            units: props.units,
         }
     }
 
@@ -20,13 +21,18 @@ class WeeklyForecast extends Component {
     }
 
     render() {
+        const {weatherData, loaded} = this.state;
         if (loaded) {
-            return {this.state.weatherData.map(dailyData => {
-                return null;
-            })};
+            return <div className='weather-container'>
+                {weatherData.map((dailyData, index) => {
+                    return <DailyForecast dayData={dailyData} index={index} displayUnits={props.displayUnits}/>
+                })};
+            </div>
         }
         else {
             return <LoadingIcon />;
         }
     }
 }
+
+export default WeeklyForecast;
