@@ -1,6 +1,10 @@
 @import 'reset.css';
 
-body {
+body, html, #app {
+    height: 100%;
+}
+
+#app {
     margin-top: 0;
     margin-left: 0;
     display: flex;
@@ -215,9 +219,8 @@ label {
     border-radius: 50%;
   }
 
-  .loading-icon {
+  .loading-circle {
     border-radius: 50%;
-    /*position: absolute;*/
     width: 30px;
     height: 30px;
     background-color: white;

@@ -3,26 +3,11 @@
     <head>
         <meta charset='UTF-8'>
         <link rel='stylesheet' href='style.css'>
+        <title>What's The Weather?</title>
     </head>
     <body>
-        <header>
-            What's The Weather?
-        </header>
-        <form onsubmit='return false' class='searchbar-form'>
-            <label for='city-name'>City:</label>
-            <input type='text' id='city-name' autocomplete='off' required>
-            <button id='submit-button' type='button'>Go!</button>
-            <div id='fahrenheit'>°F</div>
-            <div>
-                <label class='switch'>
-                    <input id='temp-swap' type='checkbox'>
-                    <span class='slider round'></span>
-                </label>
-            </div>
-            <div id='celsius'>°C</div>
-        </form>
-        <div id='display'>
-        </div>
+        <header>What's The Weather?</header>
+        <div id='app'></div>
     </body>
     <script src='main.js'>
     </script>

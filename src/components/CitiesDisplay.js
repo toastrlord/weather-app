@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CityEntry from './CityEntry';
 import {findCities} from './../weather-api';
 import LoadingIcon from './LoadingIcon';
@@ -8,8 +8,8 @@ class CitiesDisplay extends Component {
         super(props);
 
         this.state = {
-            cities = [],
-            loaded = false,
+            cities: [],
+            loaded: false,
         }
     }
 
@@ -17,7 +17,7 @@ class CitiesDisplay extends Component {
         const cities = await findCities(this.props.searchName);
         this.setState({
             cities: cities,
-            loaded = true,
+            loaded: true,
         });
     }
 

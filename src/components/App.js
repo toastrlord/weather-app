@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import Searchbar from './Searchbar';
 import CitiesDisplay from './CitiesDisplay';
+import WeeklyForecast from './WeeklyForecast';
 
 const NONE = 0;
 const FORECAST = 1;
@@ -21,6 +23,7 @@ class App extends Component {
     }
 
     searchForCity(name) {
+        console.log('Search for ' + name);
         this.setState({
             display: CITIES,
             name: name,
@@ -51,11 +54,12 @@ class App extends Component {
         }
 
         return <div>
-            <header>What's The Weather?</header>
-            <Searchbar onClick={this.toggleUnits}/>
+            <Searchbar onClickGo={this.searchForCity} toggleUnits={this.toggleUnits}/>
             <div id='display'>
                 {displayElement}
             </div>
         </div>;
     }
 }
+
+export default App;

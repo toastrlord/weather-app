@@ -1,5 +1,6 @@
+import { Component } from 'react'; 
 import LoadingIcon from './LoadingIcon';
-import {fetchWeatherData} from './..weather-api';
+import {fetchWeatherData} from '../weather-api';
 
 class WeeklyForecast extends Component {
     constructor(props) {
