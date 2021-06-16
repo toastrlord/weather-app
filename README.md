@@ -9,5 +9,9 @@ If there's multiple cities with the same name, you may be required to pick one f
 
 ![The city selection prompt](./readme_images/city_selection.png?raw=true)
 
+To change between degrees Fahrenheit and Celsius, simply click the switch to the right of the city search field.
+
+![Swap between units systems](./readme_images/toggle.png?raw=true)
+
 # Live Demo
 https://toastrlord.github.io/weather-app/
