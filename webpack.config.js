@@ -2,7 +2,6 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
     entry: './src/index.js',
     output: {
         path: path.join(__dirname, '/dist'),
@@ -21,13 +20,6 @@ module.exports = {
                     loader: 'babel-loader'
                 },
             },
-            {
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: {
-                    
-                }
-            }
         ]
     },
     plugins: [

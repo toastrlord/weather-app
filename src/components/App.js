@@ -38,6 +38,7 @@ class App extends Component {
     }
 
     toggleUnits() {
+        console.log('Toggling units');
         this.setState({
             displayUnits: this.state.displayUnits === 'F' ? 'C' : 'F'
         });
@@ -47,18 +48,15 @@ class App extends Component {
         const { display, name, displayUnits } = this.state;
         let displayElement = null;
         if (display === CITIES) {
-            displayElement =  <CitiesDisplay searchName={name} onClick={clickOnCity} />;
+            displayElement =  <CitiesDisplay searchName={name} onClick={this.clickOnCity} />;
         }
         if (display === FORECAST) {
             displayElement =  <WeeklyForecast city={this.state.currentCity} displayUnits={displayUnits} />;
         }
 
-        return <div>
-            <Searchbar onClickGo={this.searchForCity} toggleUnits={this.toggleUnits}/>
-            <div id='display'>
-                {displayElement}
-            </div>
-        </div>;
+        return (<div>
+            <button onClick={() => console.log('click!')}>Click me!!</button>
+        </div>);
     }
 }
 
