@@ -61,7 +61,6 @@ label {
     justify-content: center;
     align-items: center;
     margin-top: 32px;
-    width: 90%;
 }
 
 .searchbar-form {
@@ -96,6 +95,8 @@ label {
     padding-left: 12px;
     padding-right: 12px;
     text-align: center;
+    margin-left: 64px;
+    margin-right: 64px;
 }
 
 .city-entry {
@@ -103,26 +104,27 @@ label {
     margin-bottom: 2px;
 }
 
-.weather-container, .city-container, .loading-container {
+.city-container, .loading-container {
     display: flex;
     justify-content: center;
 }
 
-.weather-container, .city-container {
-    flex-wrap: wrap;
-    align-items: center;
+.weather-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
 }
 
 .weather-data-display, .city-data-display {
-    display: flex;
+    display: grid;
     flex-direction: column;
-    align-items: center;
     background-color: #5a7de8;
     transition: all 500ms;
     border-radius: 12px;
     margin: 6px;
     padding: 10px;
     transition: all 250ms;
+    text-align: center;
+    justify-items: center;
 }
 
 .city-data-display {
@@ -143,6 +145,7 @@ label {
 .weekday {
     font-weight: bold;
     margin-bottom: 6px;
+    text-align: center;
 }
 
 .temperature-container {
@@ -253,13 +256,25 @@ label {
     }
 
     .weather-container {
-        flex-direction: column;
-        width: 100%;
+        display: grid;
+        row-gap: 25px;
+        grid-template-columns: 1fr;
     }
 
-    .weather-data-display {
-        flex-direction: row;
-        justify-content: space-evenly;
-        width: 90%;
+    .weekday {
+        text-align: left;
     }
+
+
+    .weather-data-display {
+        display: grid;
+        grid-template-columns: 2fr 0.5fr 1.5fr 1fr;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .date-header {
+        justify-self: start;
+    }
+
 }
